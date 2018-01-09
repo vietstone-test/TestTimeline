@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AvailableRangeViewDelegate: class {
+    func normalizeY(_ y: CGFloat) -> (CGFloat, Date)
+}
+
 class AvailableRangeView: UIView {
     @IBOutlet weak var activeRangeView: UIView!
     
@@ -21,6 +25,8 @@ class AvailableRangeView: UIView {
     @IBOutlet weak var upTimeLabel: UILabel!
     
     @IBOutlet weak var downTimeLabel: UILabel!
+    
+    weak var delegate: AvailableRangeViewDelegate?
     
     var minimumRangeHeight: CGFloat = 50
     
@@ -51,15 +57,22 @@ class AvailableRangeView: UIView {
             gesture.setTranslation(.zero, in: nil)
         }
         
-        // make movement
-        let vTranslate = gesture.translation(in: self).y
-        guard activeRangeTopConstraint.constant + vTranslate >= validY.above,
-            activeRangeView.height - vTranslate >= minimumRangeHeight else {
-            return
+        if gesture.state == .began || gesture.state == . changed {
+            // make movement
+            let vTranslate = gesture.translation(in: self).y
+            guard activeRangeTopConstraint.constant + vTranslate >= validY.above,
+                activeRangeView.height - vTranslate >= minimumRangeHeight else {
+                    return
+            }
+            
+            activeRangeHeightConstraint.constant = activeRangeView.height - vTranslate
+            activeRangeTopConstraint.constant += vTranslate
+            
+            updateTimeLabel()
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            normalizeAboveLine()
         }
         
-        activeRangeHeightConstraint.constant = activeRangeView.height - vTranslate
-        activeRangeTopConstraint.constant += vTranslate
     }
     
     @objc func handleDownArrowPanGeture(_ gesture: UIPanGestureRecognizer) {
@@ -68,17 +81,75 @@ class AvailableRangeView: UIView {
             gesture.setTranslation(.zero, in: nil)
         }
         
-        // make movement
-        let vTranslate = gesture.translation(in: self).y
-        guard activeRangeView.height + vTranslate >= minimumRangeHeight, activeRangeView.y + activeRangeView.height + vTranslate <= validY.below else {
-            return
+        if gesture.state == .began || gesture.state == . changed {
+            // make movement
+            let vTranslate = gesture.translation(in: self).y
+            guard activeRangeView.height + vTranslate >= minimumRangeHeight, activeRangeView.y + activeRangeView.height + vTranslate <= validY.below else {
+                return
+            }
+            
+            activeRangeHeightConstraint.constant = activeRangeView.height + vTranslate
+            
+            updateTimeLabel()
+        } else if gesture.state == .ended || gesture.state == .cancelled {
+            normalizeBelowLine()
         }
-        
-        activeRangeHeightConstraint.constant = activeRangeView.height + vTranslate
     }
     
     func reDraw() {
         activeRangeTopConstraint.constant = validY.above
         activeRangeHeightConstraint.constant = minimumRangeHeight
+        
+        updateTimeLabel()
+    }
+    
+    func updateTimeLabel() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.timeZone = Calendar.current.timeZone
+        formatter.locale = Calendar.current.locale
+        
+        if let upNormalize = delegate?.normalizeY(activeRangeTopConstraint.constant) {
+            let date = upNormalize.1
+            upTimeLabel.text = formatter.string(from: date)
+        }
+        
+        if let downNormalize = delegate?.normalizeY(activeRangeTopConstraint.constant + activeRangeHeightConstraint.constant) {
+            let date = downNormalize.1
+            downTimeLabel.text = formatter.string(from: date)
+        }
+    }
+    
+    func normalizeAboveLine() {
+        if let upNormalize = delegate?.normalizeY(activeRangeTopConstraint.constant) {
+            let y = upNormalize.0
+            let delta = y - activeRangeTopConstraint.constant
+            activeRangeTopConstraint.constant += delta
+            activeRangeHeightConstraint.constant -= delta
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            formatter.timeZone = Calendar.current.timeZone
+            formatter.locale = Calendar.current.locale
+            
+            let date = upNormalize.1
+            upTimeLabel.text = formatter.string(from: date)
+        }
+    }
+    
+    func normalizeBelowLine() {
+        if let downNormalize = delegate?.normalizeY(activeRangeTopConstraint.constant + activeRangeHeightConstraint.constant) {
+            let y = downNormalize.0
+            let delta = y - (activeRangeTopConstraint.constant + activeRangeHeightConstraint.constant)
+            activeRangeHeightConstraint.constant += delta
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            formatter.timeZone = Calendar.current.timeZone
+            formatter.locale = Calendar.current.locale
+            
+            let date = downNormalize.1
+            downTimeLabel.text = formatter.string(from: date)
+        }
     }
 }

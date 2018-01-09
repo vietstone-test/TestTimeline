@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-  @IBOutlet weak var timeLineView: TimelineView!
+    @IBOutlet weak var timeLineView: TimelineView!
+    private var availableRangeView: AvailableRangeView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
         
         // add range view
         if let availableRangeView = AvailableRangeView.create() {
+            self.availableRangeView = availableRangeView
+            availableRangeView.delegate = self
             availableRangeView.translatesAutoresizingMaskIntoConstraints = false
             timeLineView.addSubview(availableRangeView)
             NSLayoutConstraint.activate([
@@ -29,16 +32,16 @@ class ViewController: UIViewController {
                 ])
             
             availableRangeView.validY = timeLineView.validY
-            availableRangeView.minimumRangeHeight = timeLineView.verticalDiff
+            availableRangeView.minimumRangeHeight = timeLineView.verticalDiff / 2
             availableRangeView.reDraw()
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+extension ViewController: AvailableRangeViewDelegate {
+    func normalizeY(_ y: CGFloat) -> (CGFloat, Date) {
+        return timeLineView.normalizeY(y)
     }
-
-
 }
 

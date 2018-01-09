@@ -22,7 +22,7 @@ public class TimelineView: UIView {
 
   var style = TimelineStyle()
 
-  var verticalDiff: CGFloat = 45
+  var verticalDiff: CGFloat = 50
   var verticalInset: CGFloat = 10
   var leftInset: CGFloat = 53
 
@@ -192,11 +192,46 @@ public class TimelineView: UIView {
         return hourY + minuteY
     }
     
-    func yToTime(_ y: CGFloat) -> Date {
+    private func yToTimeNumber(_ y: CGFloat) -> (Int, Int) {
         let timeY = y - verticalInset
         let h = Int(timeY / verticalDiff)
         let mY = timeY - CGFloat(h) * verticalDiff
         let m = Int(mY * 60 / verticalDiff)
+        
+        return (h, m)
+    }
+    
+//    func yToTime(_ y: CGFloat) -> Date {
+//        let timeY = y - verticalInset
+//        let h = Int(timeY / verticalDiff)
+//        let mY = timeY - CGFloat(h) * verticalDiff
+//        let m = Int(mY * 60 / verticalDiff)
+//        
+//        var dateComponents = DateComponents()
+//        dateComponents.timeZone = Calendar.current.timeZone
+//        dateComponents.hour = h
+//        dateComponents.minute = m
+//        
+//        let userCalendar = Calendar.current
+//        return userCalendar.date(from: dateComponents) ?? Date()
+//    }
+    
+    var validY: (above: CGFloat, below: CGFloat) {
+        let above = verticalInset
+        let below = verticalInset + 24 * verticalDiff
+        return (above, below)
+    }
+    
+    func normalizeY(_ y: CGFloat) -> (CGFloat, Date) {
+        var (h, m) = yToTimeNumber(y)
+        if m > 45 {
+            m = 0
+            h += 1
+        } else if m > 15 {
+            m = 30
+        } else {
+            m = 0
+        }
         
         var dateComponents = DateComponents()
         dateComponents.timeZone = Calendar.current.timeZone
@@ -204,12 +239,9 @@ public class TimelineView: UIView {
         dateComponents.minute = m
         
         let userCalendar = Calendar.current
-        return userCalendar.date(from: dateComponents) ?? Date()
-    }
-    
-    var validY: (above: CGFloat, below: CGFloat) {
-        let above = verticalInset
-        let below = verticalInset + 24 * verticalDiff
-        return (above, below)
+        let dateNormalized = userCalendar.date(from: dateComponents) ?? Date()
+        let yNormalized = timeToY(dateNormalized)
+        
+        return (yNormalized, dateNormalized)
     }
 }

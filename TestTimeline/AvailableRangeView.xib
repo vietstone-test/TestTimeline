@@ -43,13 +43,13 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZe-ug-Nt2">
-                    <rect key="frame" x="322.5" y="155" width="37.5" height="20"/>
+                    <rect key="frame" x="322.5" y="145" width="37.5" height="20"/>
                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJ8-Sc-zWe">
-                    <rect key="frame" x="16" y="239.5" width="37.5" height="20"/>
+                    <rect key="frame" x="16" y="249" width="37.5" height="20"/>
                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -60,11 +60,11 @@
                 <constraint firstItem="WPr-Ab-nde" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="0Nd-te-pm2"/>
                 <constraint firstItem="WPr-Ab-nde" firstAttribute="top" secondItem="3pl-Yz-8CH" secondAttribute="bottom" constant="-30" id="4KS-hN-AVg"/>
                 <constraint firstItem="WPr-Ab-nde" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="135" id="Nfg-K5-aQz"/>
-                <constraint firstItem="qtt-EA-H1K" firstAttribute="centerY" secondItem="eJ8-Sc-zWe" secondAttribute="centerY" constant="30" id="Xxh-ap-hmx"/>
+                <constraint firstItem="qtt-EA-H1K" firstAttribute="centerY" secondItem="eJ8-Sc-zWe" secondAttribute="centerY" constant="20" id="Xxh-ap-hmx"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3pl-Yz-8CH" secondAttribute="trailing" constant="4" id="bds-FB-3JE"/>
                 <constraint firstItem="WPr-Ab-nde" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bwL-h4-byg"/>
                 <constraint firstItem="qtt-EA-H1K" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="iHa-IW-c8P"/>
-                <constraint firstItem="vZe-ug-Nt2" firstAttribute="centerY" secondItem="3pl-Yz-8CH" secondAttribute="centerY" constant="30" id="l5x-su-rEv"/>
+                <constraint firstItem="vZe-ug-Nt2" firstAttribute="centerY" secondItem="3pl-Yz-8CH" secondAttribute="centerY" constant="20" id="l5x-su-rEv"/>
                 <constraint firstItem="vZe-ug-Nt2" firstAttribute="centerX" secondItem="3pl-Yz-8CH" secondAttribute="centerX" id="lNk-Xk-9eK"/>
                 <constraint firstItem="eJ8-Sc-zWe" firstAttribute="centerX" secondItem="qtt-EA-H1K" secondAttribute="centerX" id="tWN-WG-zpe"/>
                 <constraint firstItem="qtt-EA-H1K" firstAttribute="top" secondItem="WPr-Ab-nde" secondAttribute="bottom" constant="-30" id="y4a-Ee-cpu"/>

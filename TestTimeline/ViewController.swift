@@ -11,6 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var timeLineView: TimelineView!
     private var availableRangeView: AvailableRangeView!
+    
+    var fullHeight: CGFloat {
+        return timeLineView.fullHeight + 40 + 8
+    }
   
     override func viewDidLoad() {
         super.viewDidLoad()

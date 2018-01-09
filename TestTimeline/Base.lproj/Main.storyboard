@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PingFang.ttc">
+            <string>PingFangSC-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -18,35 +23,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkd-nf-gcu">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BJ8-uk-2Ev">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="647"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d90-fE-n5r" customClass="TimelineView" customModule="TestTimeline" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d90-fE-n5r" customClass="TimelineView" customModule="TestTimeline" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="68" width="359" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="BJ8-uk-2Ev" firstAttribute="width" secondItem="Vkd-nf-gcu" secondAttribute="width" id="3ZQ-lS-KGQ"/>
-                                    <constraint firstItem="BJ8-uk-2Ev" firstAttribute="top" secondItem="Vkd-nf-gcu" secondAttribute="top" constant="100" id="Ocy-xj-YMI"/>
-                                    <constraint firstAttribute="trailing" secondItem="BJ8-uk-2Ev" secondAttribute="trailing" id="R7U-jT-p49"/>
-                                    <constraint firstItem="BJ8-uk-2Ev" firstAttribute="leading" secondItem="Vkd-nf-gcu" secondAttribute="leading" id="Vff-qy-7Ss"/>
-                                    <constraint firstItem="BJ8-uk-2Ev" firstAttribute="height" secondItem="Vkd-nf-gcu" secondAttribute="height" placeholder="YES" id="kY5-1L-fJm"/>
-                                    <constraint firstAttribute="bottom" secondItem="BJ8-uk-2Ev" secondAttribute="bottom" constant="100" id="ya5-Li-zN0"/>
+                                    <constraint firstAttribute="height" constant="300" placeholder="YES" id="ONZ-sn-2Tq"/>
                                 </constraints>
-                            </scrollView>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBe-zO-K8x">
+                                <rect key="frame" x="0.0" y="20" width="375" height="40"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xZg-jO-JWv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Vkd-nf-gcu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1vi-4Z-Xco"/>
-                            <constraint firstItem="Vkd-nf-gcu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="DAZ-ma-KqF"/>
-                            <constraint firstItem="Vkd-nf-gcu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="fEN-sK-5NO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vkd-nf-gcu" secondAttribute="bottom" id="pgL-XC-PtO"/>
+                            <constraint firstItem="xBe-zO-K8x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4wB-Jf-xL9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xBe-zO-K8x" secondAttribute="trailing" id="OP4-SG-D3i"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="d90-fE-n5r" secondAttribute="trailing" constant="16" id="Oxq-kA-J3s"/>
+                            <constraint firstItem="xBe-zO-K8x" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vfg-Yo-RwK"/>
+                            <constraint firstItem="d90-fE-n5r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="epH-wH-w5q"/>
+                            <constraint firstItem="d90-fE-n5r" firstAttribute="top" secondItem="xBe-zO-K8x" secondAttribute="bottom" constant="8" id="qYM-DA-rqo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

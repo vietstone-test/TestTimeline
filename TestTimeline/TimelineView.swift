@@ -140,7 +140,7 @@ public class TimelineView: UIView {
       context?.saveGState()
       context?.setStrokeColor(self.style.lineColor.cgColor)
       context?.setLineWidth(onePixel)
-      context?.translateBy(x: 0, y: 0.5)
+//      context?.translateBy(x: 0, y: 0.5)
       let x: CGFloat = 53
       let y = verticalInset + iFloat * verticalDiff
       context?.beginPath()
@@ -158,6 +158,23 @@ public class TimelineView: UIView {
       let timeString = NSString(string: time)
 
       timeString.draw(in: timeRect, withAttributes: attributes)
+    }
+    
+    for i in 0..<24 {
+        let iFloat = CGFloat(i)
+        let context = UIGraphicsGetCurrentContext()
+        context!.interpolationQuality = .none
+        context?.saveGState()
+        context?.setStrokeColor(self.style.lineColor.cgColor)
+        context?.setLineWidth(onePixel)
+//        context?.translateBy(x: 0, y: 0.5)
+        let x: CGFloat = 53
+        let y = verticalInset + verticalDiff / 2 + iFloat * verticalDiff
+        context?.beginPath()
+        context?.move(to: CGPoint(x: x, y: y))
+        context?.addLine(to: CGPoint(x: (bounds).width, y: y))
+        context?.strokePath()
+        context?.restoreGState()
     }
   }
 
